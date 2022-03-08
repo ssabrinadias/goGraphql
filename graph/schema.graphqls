@@ -1,24 +1,33 @@
-type Todo {
+type List {
   id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+  title: String!
+  userId: ID!
+  items: [String]!
 }
 
 type User {
   id: ID!
   name: String!
+  city: String
 }
 
 type Query {
-  todos: [Todo!]!
+  list: [List!]!
+  user: [User!]!
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+input NewList {
+  title: String!
+  userId: ID!
+  items: [String]!
+}
+
+input NewUser {
+  name: String!
+  city: String
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  createList(input: NewList!): List!
+  createUser(input: NewUser!): User!
 }
