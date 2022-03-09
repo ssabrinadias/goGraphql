@@ -256,8 +256,8 @@ type User {
 }
 
 type Query {
-  list: [List!]!
-  user: [User!]!
+  list: [List]!
+  user: [User]!
 }
 
 input NewList {
@@ -621,7 +621,7 @@ func (ec *executionContext) _Query_list(ctx context.Context, field graphql.Colle
 	}
 	res := resTmp.([]*model.List)
 	fc.Result = res
-	return ec.marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐListᚄ(ctx, field.Selections, res)
+	return ec.marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐList(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_user(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -656,7 +656,7 @@ func (ec *executionContext) _Query_user(ctx context.Context, field graphql.Colle
 	}
 	res := resTmp.([]*model.User)
 	fc.Result = res
-	return ec.marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUserᚄ(ctx, field.Selections, res)
+	return ec.marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -2802,7 +2802,7 @@ func (ec *executionContext) marshalNList2githubᚗcomᚋssabrinadiasᚋgoGraphql
 	return ec._List(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐListᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.List) graphql.Marshaler {
+func (ec *executionContext) marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐList(ctx context.Context, sel ast.SelectionSet, v []*model.List) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2826,7 +2826,7 @@ func (ec *executionContext) marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoG
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNList2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐList(ctx, sel, v[i])
+			ret[i] = ec.marshalOList2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐList(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2836,12 +2836,6 @@ func (ec *executionContext) marshalNList2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoG
 
 	}
 	wg.Wait()
-
-	for _, e := range ret {
-		if e == graphql.Null {
-			return graphql.Null
-		}
-	}
 
 	return ret
 }
@@ -2911,7 +2905,7 @@ func (ec *executionContext) marshalNUser2githubᚗcomᚋssabrinadiasᚋgoGraphql
 	return ec._User(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUserᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.User) graphql.Marshaler {
+func (ec *executionContext) marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v []*model.User) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2935,7 +2929,7 @@ func (ec *executionContext) marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoG
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNUser2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUser(ctx, sel, v[i])
+			ret[i] = ec.marshalOUser2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUser(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2945,12 +2939,6 @@ func (ec *executionContext) marshalNUser2ᚕᚖgithubᚗcomᚋssabrinadiasᚋgoG
 
 	}
 	wg.Wait()
-
-	for _, e := range ret {
-		if e == graphql.Null {
-			return graphql.Null
-		}
-	}
 
 	return ret
 }
@@ -3244,6 +3232,13 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return res
 }
 
+func (ec *executionContext) marshalOList2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐList(ctx context.Context, sel ast.SelectionSet, v *model.List) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._List(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalOString2ᚖstring(ctx context.Context, v interface{}) (*string, error) {
 	if v == nil {
 		return nil, nil
@@ -3258,6 +3253,13 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	}
 	res := graphql.MarshalString(*v)
 	return res
+}
+
+func (ec *executionContext) marshalOUser2ᚖgithubᚗcomᚋssabrinadiasᚋgoGraphqlᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._User(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValueᚄ(ctx context.Context, sel ast.SelectionSet, v []introspection.EnumValue) graphql.Marshaler {

@@ -6,25 +6,51 @@ package graph
 import (
 	"context"
 	"fmt"
+	"math/rand"
 
 	"github.com/ssabrinadias/goGraphql/graph/generated"
 	"github.com/ssabrinadias/goGraphql/graph/model"
 )
 
 func (r *mutationResolver) CreateList(ctx context.Context, input model.NewList) (*model.List, error) {
-	panic(fmt.Errorf("not implemented"))
+	list := &model.List{
+		Title:  input.Title,
+		ID:     fmt.Sprintf("T%d", rand.Int()),
+		UserID: input.UserID,
+		Items:  input.Items,
+	}
+	r.list = append(r.list, list)
+	return list, nil
 }
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	user := &model.User{
+		Name: input.Name,
+		ID:   fmt.Sprintf("T%d", rand.Int()),
+		City: input.City,
+	}
+	r.user = append(r.user, user)
+	return user, nil
 }
 
 func (r *queryResolver) List(ctx context.Context) ([]*model.List, error) {
-	panic(fmt.Errorf("not implemented"))
+	var links []*model.List
+	var x *string
+	y := "cerveja"
+	x = &y
+	arrayItems := make([]*string, 0, 10)
+	arrayItems = append(arrayItems, x)
+	dummyLink := model.List{
+		Title:  "Lista de Bebidas",
+		UserID: "123",
+		Items:  arrayItems,
+	}
+	links = append(links, &dummyLink)
+	return links, nil
 }
 
 func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	return []*model.User{}, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.

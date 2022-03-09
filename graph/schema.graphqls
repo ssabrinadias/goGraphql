@@ -12,8 +12,8 @@ type User {
 }
 
 type Query {
-  list: [List!]!
-  user: [User!]!
+  list: [List]!
+  user: [User]!
 }
 
 input NewList {
